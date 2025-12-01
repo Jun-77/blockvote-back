@@ -6,9 +6,9 @@ services:
     container_name: backend
     restart: always
     ports:
-      - "80:5000"      # 외부 80 → 내부 5000 (리버스 프록시로 HTTPS 처리 권장)
+      - "80:5000"      
     env_file:
-      - ./backend.env  # 깃헙 액션이 서버로 보내주는 env 파일
+      - ./backend.env 
     depends_on:
       db:
         condition: service_healthy
@@ -30,8 +30,7 @@ services:
       MYSQL_DATABASE: ${DB_NAME}
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PASSWORD}
-    # 포트 노출 제거 - 외부 접근 차단, 내부 네트워크만 허용
-    # SSH 터널로 관리: ssh -L 3306:localhost:3306 user@server
+
     volumes:
       - db_data:/var/lib/mysql
     networks:
